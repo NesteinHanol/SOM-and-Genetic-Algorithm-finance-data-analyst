@@ -1,0 +1,1 @@
+# SOM-and-Genetic-Algorithm-finance-data-analyst
