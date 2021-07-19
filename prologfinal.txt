@@ -1,0 +1,44 @@
+basdonmesi(hilmi).
+basdonmesi(mazhar).
+
+midebulantisi(ahmet).
+midebulantisi(mehmet).
+midebulantisi(mazhar).
+
+ates(ahmet,34).
+ates(mehmet,35).
+ates(hilmi,39).
+ates(mazhar,40).
+
+tansiyon(ahmet,12).
+tansiyon(mehmet,15).
+tansiyon(hilmi,16).
+tansiyon(mazhar,18).
+
+
+yuksektansiyon(X):-tansiyon(X,Y),Y>13.
+yuksekates(X):-ates(X,Y),Y>37.
+hastalikX(X):-yuksekates(X),midebulantisi(X).
+hastalikY(X):-yuksektansiyon(X),hastalikX(X).
+hastalikZ(X):-basdonmesi(X),hastalikY(X).
+
+
+2----------------
+son([X],X).
+son([_|Z],X) :- son(Z,X).
+
+3------------------------
+sonuncuyu_cikar([_], []).
+sonuncuyu_cikar([X|Xs], [X|W]) :- 
+    sonuncuyu_cikar(Xs, W).
+4---------------------------------
+neglist([],[]).
+neglist([InHead|InTail],[OutHead|OutTail]) :-
+              OutHead is -1 * InHead,
+              neglist(InTail,OutTail).
+5---------------------------------
+teklestir([], []).
+
+teklestir([First | Rest], NewRest) :- member(First, Rest), teklestir(Rest, NewRest).
+
+teklestir([First | Rest], [First | NewRest]) :- not(member(First, Rest)), teklestir(Rest, NewRest).

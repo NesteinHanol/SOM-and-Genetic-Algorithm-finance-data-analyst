@@ -1,0 +1,58 @@
+# -*- coding: cp1254 -*-
+##import urllib2
+##import re
+##htmlfile=urllib2.urlopen("https://www.investing.com/commodities/copper")
+##htmltext=htmlfile.read()
+##
+##regex='<span class="arial_26 inlineblock pid-8831-last" id="last_last" dir="ltr">(.+?)</span>'
+##pattern = re.compile(regex)
+##price = re.findall(pattern,htmltext)
+
+
+import urllib2
+import re
+
+url = "https://www.investing.com/commodities/copper"
+user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
+headers = { 'User-Agent' : user_agent }
+
+req = urllib2.Request(url, headers=headers)
+
+response = urllib2.urlopen(req)
+
+your_json = response.read()
+response.close()
+
+regex='<span class="arial_26 inlineblock pid-8831-last" id="last_last" dir="ltr">(.+?)</span>'
+pattern = re.compile(regex)
+price = re.findall(pattern,your_json)
+
+import time
+#time.sleep(3600) 1 saat demek
+#s=x[0]+x[2]+x[3]+x[4]+"."+x[6]+x[7] altýn için gelen deger duzenle
+#hepsi icin amerikan sunucusundan cek
+
+
+##import smtplib                           #smtplib modulunu projemize ekledik
+### Hesap bilgilerimiz
+##kullanýcý="gmailadresimiz@gmail.com"
+##kullanýcý_sifresi = 'gmailsifremiz'
+##alýcý = 'gönderilen@mail.com'            # alýcýnýn mail adresi
+##konu = 'Selam'
+##msj = 'Naber!'
+### bilgileri bir metinde derledik
+##email_text = """
+##From: {}
+##To: {}
+##Subject: {}
+##{}
+##""" .format(kullanýcý,alýcý, konu, msj)
+##try:
+##server = smtplib.SMTP('smtp.gmail.com:587')   #servere baðlanmak için gerekli host ve portu belirttik
+##server.starttls() #serveri TLS(bütün baðlantý þifreli olucak bilgiler korunucak) baðlantýsý ile baþlattýk
+##server.login(kullanýcý, kullanýcý_sifresi)   # Gmail SMTP server'ýna giriþ yaptýk
+##server.sendmail(kullanýcý, alýcý, email_text) # Mail'imizi gönderdik 
+##server.close()     # SMTP serverimizi kapattýk
+##print ('email gönderildi')
+##except:
+##print("bir hata oluþtu")
